@@ -26,4 +26,22 @@ MyStore::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  
+  config.log_level = :info
+  
+  config.serve_static_assets = false
+  
+  config.action_mailer.raise_delivery_errors = true
+  
+  config.action_mailer.default_url_options = { host: "http://localhost:4000" }
+  
+  config.action_mailer.smtp_settings = {
+    address: "mail.novex-intl.com",
+    port: 587,
+    user_name: "iphoto@novex-intl.com",
+    password: "oW(qVCVzktFo",
+    authentication: 'plain',
+    enable_starttls_auto: false
+  }
+  
 end
