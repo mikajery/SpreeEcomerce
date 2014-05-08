@@ -47,7 +47,9 @@
 	
 	<%= f.field_container :country do %>
       <%= f.label :country, Spree.t(:country) %> <br />
-      <%= f.country_select :country, ["my"], iso_codes: true, :class => 'fullwidth ' %>
+      <%#= f.country_select :country, ["my"], iso_codes: true, :class => 'fullwidth ' %>
+			<span id="country"><%= f.collection_select :country, available_countries, :iso, :name, {}, {:class => 'select2 fullwidth'} %></span>
+			
       <%= f.error_message_on :country %>
   <% end %>
 	

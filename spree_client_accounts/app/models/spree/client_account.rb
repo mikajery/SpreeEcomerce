@@ -57,7 +57,7 @@ module Spree
         if the_country.nil?
           return country
         end
-        the_country.iso_name
+        the_country.name
       end
     
     end
