@@ -54,8 +54,8 @@ gem 'spree_static_content', github: 'spree/spree_static_content', :branch => '2-
 
 gem 'spree_client_accounts', :path => "spree_client_accounts"
 
-gem 'countries'
-gem 'country_select'
+#gem 'countries'
+#gem 'country_select'
 gem 'thin'
 
 

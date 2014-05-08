@@ -51,8 +51,13 @@ module Spree
       if country.to_s.blank?
         nil
       else
-        the_country = Country[country]
-        the_country.translations[I18n.locale.to_s] || the_country.name
+        
+        the_country = Spree::Country.find_by(iso: country.upcase)
+        
+        if the_country.nil?
+          return country
+        end
+        the_country.iso_name
       end
     
     end
