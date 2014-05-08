@@ -748,8 +748,8 @@ ActiveRecord::Schema.define(version: 20140428104939) do
     t.boolean  "is_master",                               default: false
     t.integer  "product_id"
     t.decimal  "cost_price",      precision: 8, scale: 2
-    t.string   "cost_currency"
     t.integer  "position"
+    t.string   "cost_currency"
     t.boolean  "track_inventory",                         default: true
     t.integer  "tax_category_id"
     t.datetime "updated_at"
