@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.3'
+gem 'rails', '~>4.0.3'
 
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
@@ -53,4 +53,9 @@ gem 'spree_fancy', :github => 'spree/spree_fancy', :branch => '2-2-stable'
 gem 'spree_static_content', github: 'spree/spree_static_content', :branch => '2-2-stable'
 
 gem 'spree_client_accounts', :path => "spree_client_accounts"
+
+gem 'countries'
+gem 'country_select'
+gem 'thin'
+
 

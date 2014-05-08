@@ -1,58 +1,72 @@
-class Spree::Admin::ClientAccountsController < Spree::Admin::BaseController
-  before_action :set_client_account, only: [:show, :edit, :update, :destroy]
+class Spree::Admin::ClientAccountsController < Spree::Admin::ResourceController
+  #before_action :set_client_account, only: [:show, :edit, :update, :destroy]
 
   # GET /client_accounts
+  def index2
+    @client_accounts = collection()#Spree::ClientAccount.all
+  end
+  
   def index
-    @client_accounts = Spree::ClientAccount.all
+    session[:return_to] = request.url
+    respond_with(@collection)
+  end
+  
+  def update
+    #Rails.logger.info "permitted: "+permitted_resource_params.inspect
+    #Rails.logger.info "object: "+@object.inspect
+    invoke_callbacks(:update, :before)
+    if @object.update_attributes(permitted_resource_params)
+      Rails.logger.info "updated-object: "+@object.inspect
+      invoke_callbacks(:update, :after)
+      flash[:success] = flash_message_for(@object, :successfully_updated)
+      respond_with(@object) do |format|
+        format.html { redirect_to location_after_save }
+        format.js   { render :layout => false }
+      end
+    else
+      # Stops people submitting blank slugs, causing errors when they try to update the product again
+      invoke_callbacks(:update, :fails)
+      respond_with(@object)
+    end
   end
 
+
+  
   # GET /client_accounts/1
   def show
+    session[:return_to] ||= request.referer
+    redirect_to( :action => :edit )
   end
-
-  # GET /client_accounts/new
-  def new
-    @client_account = Spree::ClientAccount.new
-  end
-
-  # GET /client_accounts/1/edit
-  def edit
-  end
-
-  # POST /client_accounts
-  def create
-    @client_account = Spree::ClientAccount.new(client_account_params)
-
-    if @client_account.save
-      redirect_to [:admin, @client_account], notice: 'Client account was successfully created.'
-    else
-      render action: 'new'
-    end
-  end
-
-  # PATCH/PUT /client_accounts/1
-  def update
-    if @client_account.update(client_account_params)
-      redirect_to [:admin, @client_account], notice: 'Client account was successfully updated.'
-    else
-      render action: 'edit'
-    end
-  end
-
-  # DELETE /client_accounts/1
-  def destroy
-    @client_account.destroy
-    redirect_to admin_client_accounts_url, notice: 'Client account was successfully destroyed.'
-  end
+  
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_client_account
-      @client_account = Spree::ClientAccount.find(params[:id])
-    end
+  
+  def collection
+    return @collection if @collection.present?
+    params[:q] ||= {}
+    params[:q][:deleted_at_null] ||= "1"
 
-    # Only allow a trusted parameter "white list" through.
-    def client_account_params
-      params.require(:client_account).permit(:name, :credit_duration, :credit_limit)
-    end
+    params[:q][:s] ||= "name asc"
+    @collection = super
+    # @search needs to be defined as this is passed to search_form_for
+    @search = @collection.ransack(params[:q])
+    @collection = @search.result.
+          page(params[:page]).
+          per(Spree::Config[:admin_products_per_page])
+
+    @collection
+  end
+
+  def find_resource
+    Spree::ClientAccount.find(params[:id])
+  end
+
+
+  
+  def permit_attributes
+    params.require(:client_account).permit(:name, :credit_duration, :credit_limit,
+    :contact_person, :address1, :address2, :city, :state, :country,
+    :tel1, :fax1, :email)#.permit!
+  end
+  
 end

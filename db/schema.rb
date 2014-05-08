@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508082426) do
+ActiveRecord::Schema.define(version: 20140508125139) do
 
   create_table "spree_addresses", force: true do |t|
     t.string   "firstname"
@@ -86,6 +86,15 @@ ActiveRecord::Schema.define(version: 20140508082426) do
     t.integer  "credit_limit"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tel1",            limit: 20
+    t.string   "fax1",            limit: 20
+    t.string   "email"
+    t.string   "contact_person"
+    t.string   "address1",        limit: 500
+    t.string   "address2",        limit: 500
+    t.string   "city"
+    t.string   "state"
+    t.string   "country",         limit: 2
   end
 
   create_table "spree_configurations", force: true do |t|

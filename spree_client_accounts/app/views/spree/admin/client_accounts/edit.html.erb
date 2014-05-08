@@ -1,6 +1,20 @@
-<h1>Editing <%=t "client_accounts"%></h1>
+<% content_for :page_actions do %>
+  <li><%= button_link_to Spree.t(:back_to_client_list), session[:return_to] || admin_client_accounts_url, :icon => 'arrow-left' %></li>
+  <% if can?(:create, Spree::ClientAccount) %>
+    <li id="new_client_account_link">
+      <%= button_link_to Spree.t(:new_client), new_object_url, { :icon => 'plus', :id => 'admin_new_client_account' } %>
+    </li>
+  <% end %>
+<% end %>
 
-<%= render 'form' %>
+<%= render :partial => 'spree/admin/shared/client_sub_menu' %>
 
-<%= link_to 'Show', [:admin, @client_account] %> |
-<%= link_to 'Back', admin_client_accounts_path %>
+<%=@client_account.inspect %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @object } %>
+
+<%= form_for [:admin, @object], :method => :put, :html => { :multipart => true } do |f| %>
+  <fieldset class="no-border-top">
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

@@ -1,5 +1,20 @@
-<h1>New <%=t "client_accounts"%></h1>
 
-<%= render 'form' %>
+<%= render :partial => 'spree/admin/shared/client_sub_menu' %>
 
-<%= link_to 'Back', admin_client_accounts_path %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @client_account } %>
+
+<%= form_for([:admin, @object] ) do |f| %>
+<fieldset data-hook="new_client_account">
+	<legend align="center"><%= Spree.t(:new_client) %></legend>
+
+	<%= render :partial => 'form', :locals => { :f => f } %>
+	
+	<div class="clearfix" data-hook="product-from-prototype" id="product-from-prototype">
+    <%= render :file => 'spree/admin/prototypes/show' if @prototype %>
+  </div>
+
+  <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+</fieldset>
+<% end %>
+
+

@@ -1,31 +1,62 @@
-<h1>Listing <%=t "client_accounts"%></h1>
+<% content_for :page_title do %>
+  <%= Spree.t(:listing_clients) %>
+<% end %>
 
-<table>
+<% content_for :page_actions do %>
+  <li id="new_client_account_link">
+    <%= button_link_to Spree.t(:new_client), new_admin_client_account_path, { :remote => true, :icon => 'plus', :id => 'admin_new_client' } %>
+  </li>
+<% end if can?(:create, Spree::ClientAccount) %>
+
+<%= render :partial => 'spree/admin/shared/client_sub_menu' %>
+
+<% content_for :table_filter_title do %>
+  <%= Spree.t(:search) %>
+<% end %>
+
+<div id="new_client_account_wrapper" data-hook></div>
+
+<%= paginate @client_accounts %>
+
+<% if @client_accounts.any? %>
+<table class="index" id="listing_client_accounts">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Credit duration</th>
-      <th>Credit limit</th>
-      <th></th>
-      <th></th>
-      <th></th>
+    <tr data-hook="admin_client_accounts_index_headers">
+      <th><%=Spree.t("Name") %></th>
+      <th width="120"><%=Spree.t("Credit duration") %></th>
+      <th width="120"><%=Spree.t("Credit limit") %></th>
+      <th><%=Spree.t("Contact Person") %></th>
+      <th class="align-center"><%=Spree.t("State") %></th>
+      <th><%=Spree.t("Country") %></th>
+			<th data-hook="admin_client_accounts_index_header_actions" class="actions"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @client_accounts.each do |client_account| %>
-      <tr>
-        <td><%= client_account.name %></td>
-        <td><%= client_account.credit_duration %></td>
-        <td><%= client_account.credit_limit %></td>
-        <td><%= link_to 'Show', [:admin, client_account] %></td>
-        <td><%= link_to 'Edit', edit_admin_client_account_path(client_account) %></td>
-        <td><%= link_to 'Destroy', [:admin, client_account], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <tr id="<%= spree_dom_id client_account %>" data-hook="admin_client_accounts_index_rows" class="<%= cycle('odd', 'even') %>">
+        <td><%= link_to client_account.name, edit_admin_client_account_path(client_account) %></td>
+        <td class="align-center"><%= client_account.credit_duration %></td>
+        <td class="align-center"><%= client_account.credit_limit %></td>
+        <td><%= client_account.contact_person %></td>
+        <td class="align-center"><%= client_account.state %></td>
+        <td class="align-center"><%= client_account.country_name %></td>
+				<td class="actions" data-hook="admin_products_index_row_actions">
+          <%= link_to_edit client_account, :no_text => true, :class => 'edit' if can?(:edit, client_account) %>
+          &nbsp;
+          <%= link_to_delete client_account, :no_text => true if can?(:delete, client_account) %>
+        </td>
+				
       </tr>
     <% end %>
   </tbody>
 </table>
+<% else %>
+<div class="alpha twelve columns no-objects-found">
+  <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/client_account')) %>,
+  <%= link_to Spree.t(:add_one), spree.new_admin_client_account_path %>!
+</div>
+<% end %>
 
-<br>
+<%= paginate @client_accounts %>
 
-<%= link_to 'New Client account', new_admin_client_account_path %>

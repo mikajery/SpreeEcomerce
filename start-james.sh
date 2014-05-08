@@ -1,3 +1,3 @@
 export RAILS_ENV=james
-rails s -p 4000
+thin start -p 4000
 

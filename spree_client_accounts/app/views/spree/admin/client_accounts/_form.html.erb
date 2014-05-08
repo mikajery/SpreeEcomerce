@@ -1,29 +1,98 @@
-<%= form_for([:admin, @client_account] ) do |f| %>
-  <% if @client_account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@client_account.errors.count, "error") %> prohibited this client_account from being saved:</h2>
-
-      <ul>
-      <% @client_account.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+	
+	<div class="left eight columns alpha">
+	<%= f.field_container :name do %>
+      <%= f.label :name, Spree.t(:name) %> <span class="required">*</span><br />
+      <%= f.text_field :name, :class => 'fullwidth title' %>
+      <%= f.error_message_on :name %>
+  <% end %>
+	
+	
+	<%= f.field_container :contact_person do %>
+      <%= f.label :contact_person, Spree.t(:contact_person) %> <span class="required">*</span><br />
+      <%= f.text_field :contact_person, :class => 'fullwidth' %>
+      <%= f.error_message_on :contact_person %>
+  <% end %>
+	
+	<%= f.field_container :email do %>
+      <%= f.label :email, Spree.t(:email) %> <br />
+      <%= f.text_field :email, :class => 'fullwidth' %>
+      <%= f.error_message_on :email %>
+  <% end %>
+	
+	<%= f.field_container :tel1 do %>
+      <%= f.label :tel1, Spree.t(:tel1) %> <br />
+      <%= f.text_field :tel1, :class => 'fullwidth ' %>
+      <%= f.error_message_on :tel1 %>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :credit_duration %><br>
-    <%= f.number_field :credit_duration %>
-  </div>
-  <div class="field">
-    <%= f.label :credit_limit %><br>
-    <%= f.number_field :credit_limit %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+
+	<%= f.field_container :fax1 do %>
+      <%= f.label :fax1, Spree.t(:fax1) %> <br />
+      <%= f.text_field :fax1, :class => 'fullwidth ' %>
+      <%= f.error_message_on :fax1 %>
+  <% end %>
+	
+
+	<%= f.field_container :address1 do %>
+      <%= f.label :address1, Spree.t(:address1) %> <br />
+      <%= f.text_field :address1, :class => 'fullwidth ' %>
+      <%= f.error_message_on :address1 %>
+  <% end %>
+	
+	<%= f.field_container :address2 do %>
+      <%= f.label :address2, Spree.t(:address2) %> <br />
+      <%= f.text_field :address2, :class => 'fullwidth ' %>
+      <%= f.error_message_on :address2 %>
+  <% end %>
+	
+	<%= f.field_container :country do %>
+      <%= f.label :country, Spree.t(:country) %> <br />
+      <%= f.country_select :country, ["my"], iso_codes: true, :class => 'fullwidth ' %>
+      <%= f.error_message_on :country %>
+  <% end %>
+	
+	<%= f.field_container :city do %>
+      <%= f.label :city, Spree.t(:city) %> <br />
+      <%= f.text_field :city, :class => 'fullwidth ' %>
+      <%= f.error_message_on :city %>
+  <% end %>
+	
+	<%= f.field_container :state do %>
+      <%= f.label :state, Spree.t(:state) %> <br />
+      <%= f.text_field :state, :class => 'fullwidth ' %>
+      <%= f.error_message_on :state %>
+  <% end %>
+	
+	</div>
+	
+	<div class="right eight columns omega">
+		<div class="alpha four columns">
+		<%= f.field_container :credit_duration do %>
+	      <%= f.label :credit_duration, Spree.t(:credit_duration) %> <span class="required">*</span><br />
+	      <%= f.text_field :credit_duration, :class => '' %>
+	      <%= f.error_message_on :credit_duration %>
+	  <% end %>
+		</div>
+	
+		<div class="alpha four columns">
+		<%= f.field_container :credit_limit do %>
+	      <%= f.label :credit_limit, Spree.t(:credit_limit) %> <span class="required">*</span><br />
+	      <%= f.text_field :credit_limit, :class => '' %>
+	      <%= f.error_message_on :credit_limit %>
+	  <% end %>
+		</div>
+	</div>
+	
+	<div class="clear"></div>
+	
+	<script type="text/javascript">
+	//<![CDATA[
+	  (function($){
+	    var base_url = "<%= admin_prototypes_url %>";
+			//jQuery("#client_account_country").addClass("select2");
+		
+			jQuery("#client_account_country").select2();
+			jQuery('.select2-container').css({width: '20em'})
+	  })(jQuery);
+	//]]>
+	</script>
