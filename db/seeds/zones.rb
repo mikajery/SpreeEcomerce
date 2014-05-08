@@ -14,6 +14,6 @@ west_malaysia    = Spree::Zone.create!(name: "West Malaysia", description: "West
   east_malaysia.zone_members.create!(zoneable: Spree::Country.find_by!(name: name))
 end
 
-"Malaysia"].each do |name|
+["Malaysia"].each do |name|
   west_malaysia.zone_members.create!(zoneable: Spree::Country.find_by!(name: name))
 end
