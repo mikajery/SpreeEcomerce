@@ -9,7 +9,6 @@
 
 <%= render :partial => 'spree/admin/shared/client_sub_menu' %>
 
-<%=@client_account.inspect %>
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @object } %>
 
 <%= form_for [:admin, @object], :method => :put, :html => { :multipart => true } do |f| %>
