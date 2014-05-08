@@ -5,7 +5,7 @@
   <%= tab :products, :option_types, :properties, :prototypes, :variants, :product_properties, :taxonomies, :icon => 'icon-th-large' %>
 <% end %>
 <% if Spree.user_class && can?(:admin, Spree.user_class) %>
-  <%= tab("Clients", :url => spree.admin_users_path, :icon => 'icon-user') %>
+  <%= tab("Clients", :url => spree.admin_client_accounts_path, :icon => 'icon-user') %>
 <% end %>
 <% if Spree.user_class && can?(:admin, Spree.user_class) %>
   <%= tab("Users", :url => spree.admin_users_path, :icon => 'icon-user') %>
