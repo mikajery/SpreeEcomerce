@@ -1,0 +1,31 @@
+<h1>Listing <%=t "client_accounts"%></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Credit duration</th>
+      <th>Credit limit</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @client_accounts.each do |client_account| %>
+      <tr>
+        <td><%= client_account.name %></td>
+        <td><%= client_account.credit_duration %></td>
+        <td><%= client_account.credit_limit %></td>
+        <td><%= link_to 'Show', [:admin, client_account] %></td>
+        <td><%= link_to 'Edit', edit_admin_client_account_path(client_account) %></td>
+        <td><%= link_to 'Destroy', [:admin, client_account], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Client account', new_admin_client_account_path %>

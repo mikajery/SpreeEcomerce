@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @client_account.name %></h1>
+
+<p>
+  <strong>Credit duration:</strong>
+  <%= @client_account.credit_duration %>
+</p>
+
+<p>
+  <strong>Credit limit:</strong>
+  <%= @client_account.credit_limit %>
+</p>
+
+<%= link_to 'Edit', edit_admin_client_account_path(@client_account) %> |
+<%= link_to 'Back', admin_client_accounts_path %>

@@ -38,6 +38,12 @@ GIT
     spree_gateway (2.2.1)
       spree_core (~> 2.2.0)
 
+PATH
+  remote: spree_client_accounts
+  specs:
+    spree_client_accounts (2.2.1)
+      spree_core (~> 2.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -304,6 +310,7 @@ DEPENDENCIES
   sdoc
   spree (= 2.2.1)
   spree_auth_devise!
+  spree_client_accounts!
   spree_fancy!
   spree_gateway!
   spree_static_content!

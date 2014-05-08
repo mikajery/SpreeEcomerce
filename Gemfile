@@ -52,5 +52,5 @@ gem 'money', '6.0.1'
 gem 'spree_fancy', :github => 'spree/spree_fancy', :branch => '2-2-stable'
 gem 'spree_static_content', github: 'spree/spree_static_content', :branch => '2-2-stable'
 
-gem 'spree_client_accounts', :path => "../spree_client_accounts"
+gem 'spree_client_accounts', :path => "spree_client_accounts"
 
