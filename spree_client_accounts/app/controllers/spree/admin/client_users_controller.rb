@@ -6,6 +6,9 @@ class Spree::Admin::ClientUsersController < Spree::Admin::UsersController
   
   def index
     authorize! :list, Spree::ClientUser, session[:access_token]
+    
+    #todo
+    #@users = 
     session[:return_to] = request.url
     respond_with(@collection)
   end
