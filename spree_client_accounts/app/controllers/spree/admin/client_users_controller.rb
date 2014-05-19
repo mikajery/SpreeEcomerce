@@ -1,15 +1,17 @@
-class Spree::Admin::ClientAccountsController < Spree::Admin::ResourceController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+#require "spree_client_accounts/models/spree/client_account"
+#require "ClientAccount"
+
+class Spree::Admin::ClientUsersController < Spree::Admin::UsersController
+  before_action :set_client, [:show, :edit, :update, :destroy]
   
   def index
-    #authorize! :list, Spree::ClientAccount, session[:access_token]
+    authorize! :list, Spree::ClientUser, session[:access_token]
     session[:return_to] = request.url
     respond_with(@collection)
   end
   
   def update
     authorize! :update, @object, session[:access_token]
-    #Rails.logger.info "permitted: "+permitted_resource_params.inspect
     #Rails.logger.info "object: "+@object.inspect
     invoke_callbacks(:update, :before)
     if @object.update_attributes(permitted_resource_params)
@@ -28,8 +30,6 @@ class Spree::Admin::ClientAccountsController < Spree::Admin::ResourceController
   end
 
 
-  
-  # GET /client_accounts/1
   def show
     authorize! :read, @object, session[:access_token]
     session[:return_to] ||= request.referer
@@ -56,17 +56,25 @@ class Spree::Admin::ClientAccountsController < Spree::Admin::ResourceController
   end
 
   def find_resource
-    Spree::ClientAccount.find(params[:id])
+    Spree::User.find(params[:id])
   end
 
-  def set_client
-    @client = find_resource()
+  def set_user
+    @user = find_resource()
   end
   
-  def permit_attributes
-    params.require(:client_account).permit(:name, :credit_duration, :credit_limit,
-    :contact_person, :address1, :address2, :city, :state, :country,
-    :tel1, :fax1, :email)#.permit!
+  def set_client
+    if (params[:client_id].to_i > 0)
+      session[:client_id] = params[:client_id].to_i
+    end
+    
+    @client = Spree::ClientAccount.find(session[:client_id])
   end
+  
+  # def permit_attributes
+#     params.require(:client_account).permit(:name, :credit_duration, :credit_limit,
+#     :contact_person, :address1, :address2, :city, :state, :country,
+#     :tel1, :fax1, :email)#.permit!
+#   end
   
 end

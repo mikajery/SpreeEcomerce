@@ -3,6 +3,7 @@ Spree::Core::Engine.routes.draw do
   
   namespace :admin do
     resources :client_accounts
+    resources :client_users
   end
   
   #get "admin/client_accounts", to: "admin/client_accounts#index"

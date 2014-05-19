@@ -1,5 +1,5 @@
 	
-	<div class="left eight columns alpha">
+	<div class="left six columns alpha">
 	<%= f.field_container :name do %>
       <%= f.label :name, Spree.t(:name) %> <span class="required">*</span><br />
       <%= f.text_field :name, :class => 'fullwidth title' %>
@@ -67,8 +67,8 @@
 	
 	</div>
 	
-	<div class="right eight columns omega">
-		<div class="alpha four columns">
+	<div class="right six columns omega">
+		<div class="alpha three columns">
 		<%= f.field_container :credit_duration do %>
 	      <%= f.label :credit_duration, Spree.t(:credit_duration) %> <span class="required">*</span><br />
 	      <%= f.text_field :credit_duration, :class => '' %>
@@ -76,7 +76,7 @@
 	  <% end %>
 		</div>
 	
-		<div class="alpha four columns">
+		<div class="alpha three columns">
 		<%= f.field_container :credit_limit do %>
 	      <%= f.label :credit_limit, Spree.t(:credit_limit) %> <span class="required">*</span><br />
 	      <%= f.text_field :credit_limit, :class => '' %>
