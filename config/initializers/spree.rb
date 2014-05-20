@@ -11,6 +11,10 @@ Spree.config do |config|
   # config.site_name = "Spree Demo Site"
   config.logo = 'logo/wifi_logo.png'
   config.admin_interface_logo = 'logo/wifi_logo.png'
+  
+  
 end
 
-Spree.user_class = "Spree::User"
+
+
+Spree::PermittedAttributes.user_attributes << :client_id

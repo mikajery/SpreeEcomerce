@@ -4,7 +4,37 @@ module Spree
   class ClientAccount < ActiveRecord::Base
     validates_presence_of :name, :credit_limit, :credit_duration, :contact_person
     validates_uniqueness_of :name
+    has_many :client_user, :foreign_key => :client_id
     
+    def display_lifetime_value
+      res = 0.00
+      client_user.order("id asc").each do |user|
+        if !user.display_lifetime_value.nil?
+          res += user.display_lifetime_value.cents
+        end
+      end
+      Spree::Money.new(res)
+    end
+    
+    def order_count
+      res = 0.00
+      client_user.order("id asc").each do |user|
+        if !user.order_count.nil?
+          res += user.order_count
+        end
+      end
+      res
+    end
+    
+    def display_average_order_value
+      res = 0.00
+      client_user.order("id asc").each do |user|
+        if !user.display_average_order_value.nil?
+          res += user.display_average_order_value.cents
+        end
+      end
+      Spree::Money.new(res)
+    end
     
     def self.credit_duration_options
       #todo
