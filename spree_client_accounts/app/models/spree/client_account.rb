@@ -5,6 +5,8 @@ module Spree
     validates_presence_of :name, :credit_limit, :credit_duration, :contact_person
     validates_uniqueness_of :name
     has_many :client_user, :foreign_key => :client_id
+    has_many :client_product, :foreign_key => :client_id
+    
     
     def display_lifetime_value
       res = 0.00
