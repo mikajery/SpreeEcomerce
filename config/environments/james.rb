@@ -29,7 +29,7 @@ MyStore::Application.configure do
   
   config.log_level = :info
   
-  config.serve_static_assets = false
+  config.serve_static_assets = true
   
   config.action_mailer.raise_delivery_errors = true
   
