@@ -1,9 +1,11 @@
 
 class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
   before_action :set_client
+  before_action :on_update, :only => [:update]
   
   new_action.before :new_before
   create.before :create_before
+  update.before :update_before
   
   def collection
     res = super
@@ -36,8 +38,14 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
     @product = @object
   end
   
+  def update_before
+    super
+    @product = @object
+  end
+  
   def find_resource
-    res = super
+    res = Spree::ClientProduct.with_deleted.friendly.find(params[:id])
+    #Rails.logger.info "resource: "+res.inspect
     @product = res
   end
   
@@ -45,8 +53,13 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
     Spree::ClientProduct
   end
   
+  def on_update
+    params[:product] = params[:client_product]
+  end
+  
   def permit_attributes
-    params.require(:client_product).permit!
+    res = params.require(:client_product).permit!
+    res
   end
   
 end

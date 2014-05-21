@@ -35,3 +35,10 @@ input[type="submit"], input[type="button"], button, .button,
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaefb5', endColorstr='#e1e9a0',GradientType=0 ); /* IE6-9 */
 }
 
+fieldset {
+	padding: 0 0 15px 0;
+}
+
+fieldset .filter-actions {
+	margin-top: 5px;
+}
