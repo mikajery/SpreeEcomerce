@@ -29,7 +29,7 @@ class Spree::Admin::ClientUsersController < Spree::Admin::ResourceController
     end
 
     @client_user = Spree::ClientUser.new(client_user_params)
-    @client_user.client_id = session[:client_id]
+    @client_user.client_id = session[:client_account_id]
     
     if @client_user.save
 
@@ -122,13 +122,13 @@ class Spree::Admin::ClientUsersController < Spree::Admin::ResourceController
         @collection = @search.result.page(params[:page]).per(Spree::Config[:admin_products_per_page])
       end
       
-      @collection = @collection.where(:client_id=>session[:client_id])
+      @collection = @collection.where(:client_id=>session[:client_account_id])
       @client_users = @collection
     end
 
   private
     def client_user_params
-      params.require(:client_user).permit(Spree::PermittedAttributes.user_attributes |
+      params.require(:user).permit(Spree::PermittedAttributes.user_attributes |
                                    [:spree_role_ids,
                                     ship_address_attributes: Spree::PermittedAttributes.address_attributes,
                                     bill_address_attributes: Spree::PermittedAttributes.address_attributes])
@@ -166,9 +166,9 @@ class Spree::Admin::ClientUsersController < Spree::Admin::ResourceController
     end
     
     def set_client
-      if params[:client_id].to_i > 0
-        session[:client_id] = params[:client_id].to_i
+      if params[:client_account_id].to_i > 0
+        session[:client_account_id] = params[:client_account_id].to_i
       end
-      @client = Spree::ClientAccount.find(session[:client_id])
+      @client = Spree::ClientAccount.find(session[:client_account_id])
     end
 end

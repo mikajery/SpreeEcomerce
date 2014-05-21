@@ -4,7 +4,7 @@
 
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to Spree.t(:back_to_users_list), spree.admin_client_users_path, :icon => 'arrow-left' %>
+    <%= button_link_to Spree.t(:back_to_users_list), spree.admin_client_account_client_users_path, :icon => 'arrow-left' %>
   </li>
 <% end %>
 
@@ -13,7 +13,7 @@
 </div>
 
 <div data-hook="admin_user_new_form">
-  <%= form_for [:admin, @client_user], url: admin_client_users_url, method: :post do |f| %>
+  <%= form_for [:admin, @client_user], url: admin_client_account_client_users_url, method: :post do |f| %>
     <%= render :partial => 'form', :locals => { :f => f } %>
 
     <div data-hook="admin_user_new_form_buttons">

@@ -10,11 +10,11 @@
       <% end if can?(:admin, Spree::ClientAccount) %>
 			
       <%= content_tag :li, :class => ('active' if current == 'Users') do %>
-        <%= link_to_with_icon 'users', Spree.t(:users), admin_client_users_url(:client_id=>@client.id) %>
+        <%= link_to_with_icon 'users', Spree.t(:users), admin_client_account_client_users_url(:client_account_id=>@client.id) %>
       <% end if can?(:admin, Spree::ClientAccount) %>
 
       <%= content_tag :li, :class => ('active' if current == 'Product Management') do %>
-        <%= link_to_with_icon 'tasks', Spree.t(:product_management), admin_client_products_url(:client_id=>@client.id) %>
+        <%= link_to_with_icon 'tasks', Spree.t(:product_management), admin_client_account_client_products_url(:client_account_id=>@client.id) %>
       <% end if can?(:admin, Spree::Product) %>
       </li>
     </ul>

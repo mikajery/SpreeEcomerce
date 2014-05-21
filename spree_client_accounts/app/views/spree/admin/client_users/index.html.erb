@@ -4,7 +4,7 @@
 
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to Spree.t(:new_user), new_admin_client_user_url, :icon => 'icon-plus', :id => 'admin_new_user_link' %>
+    <%= button_link_to Spree.t(:new_user), new_admin_client_account_client_user_url, :icon => 'icon-plus', :id => 'admin_new_user_link' %>
   </li>
 <% end %>
 
@@ -22,10 +22,10 @@
   <tbody>
     <% @collection.each do |user|%>
       <tr id="<%= spree_dom_id user %>" data-hook="admin_users_index_rows" class="<%= cycle('odd', 'even')%>">
-        <td class='user_email'><%=link_to user.email, edit_admin_client_user_url(user) %></td>
+        <td class='user_email'><%=link_to user.email, edit_admin_client_account_client_user_url(@client, user) %></td>
         <td data-hook="admin_users_index_row_actions" class="actions">
-          <%= link_to_edit user, :no_text => true %>
-          <%= link_to_delete user, :no_text => true %>
+          <%= link_to_edit user, :url=>edit_admin_client_account_client_user_url(@client, user), :no_text => true %>
+          <%= link_to_delete user, :url =>  admin_client_account_client_user_url(@client, user) , :no_text => true %>
         </td>
       </tr>
     <% end %>
@@ -46,18 +46,18 @@
       <% end if can?(:admin, Spree::ClientAccount) %>
 			
       <%= content_tag :li, :class => ('active') do %>
-        <%= link_to_with_icon 'users', Spree.t(:users), admin_client_users_url(:client_id=>@client.id) %>
+        <%= link_to_with_icon 'users', Spree.t(:users), admin_client_account_client_users_url(@client) %>
       <% end if can?(:admin, Spree::ClientAccount) %>
 
       <%= content_tag :li, :class => ('') do %>
-        <%= link_to_with_icon 'tasks', Spree.t(:product_management), admin_products_url(:client_id=>@client.id) %>
+        <%= link_to_with_icon 'tasks', Spree.t(:product_management), admin_client_account_client_products_url(@client) %>
       <% end if can?(:admin, Spree::Product) %>
       </li>
     </ul>
   </nav>
 	
   <div class="box align-center" data-hook="admin_users_index_search">
-    <%= search_form_for [:admin, @search], url: admin_client_users_url do |f| %>
+    <%= search_form_for [:admin, @search], url: admin_client_account_client_users_url do |f| %>
       <div class="field">
         <%= f.label Spree.t(:email) %> <br>
         <%= f.text_field :email_cont, :class => 'fullwidth' %>

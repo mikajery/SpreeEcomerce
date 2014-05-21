@@ -3,6 +3,8 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
   before_action :set_client
   before_action :on_update, :only => [:update]
   
+  helper_method :clone_object_url
+  
   new_action.before :new_before
   create.before :create_before
   update.before :update_before
@@ -34,7 +36,6 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
   end
   
   def new_before
-    Rails.logger.info "new before!!!!!"
     @product = @object
   end
   
