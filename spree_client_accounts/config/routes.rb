@@ -4,8 +4,20 @@ Spree::Core::Engine.routes.draw do
   namespace :admin do
     resources :client_accounts, path: "clients" do
       resources :client_users, path: "users"
+      
       resources :client_products, path: "products" do
-        resources :client_product_images, path: "images"
+        resources :client_product_images, path: "images" do
+          collection do
+            post :update_positions
+          end
+        end
+        
+        get "clone" => "client_products#clone", 
+          as: :clone
+          
+        get "stock" => "client_products#stock", 
+          as: :stock
+          
       end
       
     end
@@ -42,11 +54,9 @@ Spree::Core::Engine.routes.draw do
 #     as: :delete_admin_client_product_image
     
     
-    get "client_products/:id/clone" => "client_products#clone", 
-      as: :clone_admin_client_product
     
-    get "client_products/:id/stock" => "client_products#stock", 
-      as: :stock_admin_client_product
+    
+    
     
     
   end

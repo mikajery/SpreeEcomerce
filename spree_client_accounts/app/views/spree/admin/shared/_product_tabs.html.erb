@@ -12,10 +12,10 @@
 			<% if @product.is_a?(Spree::ClientProduct) %>
 			
       <%= content_tag :li, :class => ('active' if current == 'Product Details') do %>
-        <%= link_to_with_icon 'edit', Spree.t(:product_details), edit_admin_client_product_url(@product) %>
+        <%= link_to_with_icon 'edit', Spree.t(:product_details), edit_admin_client_account_client_product_url(@client, @product) %>
       <% end if can?(:admin, Spree::Product) %>
       <%= content_tag :li, :class => ('active' if current == 'Images') do %>
-        <%= link_to_with_icon 'picture', Spree.t(:images), admin_client_product_client_product_images_url(@product) %>
+        <%= link_to_with_icon 'picture', Spree.t(:images), admin_client_account_client_product_client_product_images_url(@client, @product) %>
       <% end if can?(:admin, Spree::Image) %>
       <%= content_tag :li, :class => ('active' if current == 'Variants') do %>
         <%= link_to_with_icon 'th-large', Spree.t(:variants),  admin_product_variants_url(@product) %>
@@ -24,7 +24,7 @@
         <%= link_to_with_icon 'tasks', Spree.t(:product_properties), admin_product_product_properties_url(@product) %>
       <% end if can?(:admin, Spree::ProductProperty) %>
       <%= content_tag :li, :class => ('active' if current == 'Stock Management') do %>
-        <%= link_to_with_icon 'tasks', Spree.t(:stock_management), stock_admin_product_url(@product) %>
+        <%= link_to_with_icon 'tasks', Spree.t(:stock_management), 	admin_client_account_client_product_stock_url(@client, @product) %>
       <% end if can?(:stock, Spree::Product) %>
 			
 			

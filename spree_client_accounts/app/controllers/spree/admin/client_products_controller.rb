@@ -3,8 +3,6 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
   before_action :set_client
   before_action :on_update, :only => [:update]
   
-  helper_method :clone_object_url
-  
   new_action.before :new_before
   create.before :create_before
   update.before :update_before
@@ -14,10 +12,29 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
     res = res.where(:client_id => session[:client_account_id])
   end
   
+  def clone
+    find_resource
+    super
+  end
+  
   protected
   
   def location_after_save
-    spree.edit_admin_client_product_url(@object)
+    spree.edit_admin_client_account_client_product_url(@client, @object)
+  end
+  
+  def collection_url
+    admin_client_account_client_products_url(@client)
+  end
+  
+  def edit_admin_product_url(res)
+    edit_admin_client_account_client_product_url(@client, res)
+  end
+  
+  def clone_object_url(resource)
+    #request.url(:action => :clone)
+    Rails.logger.info resource.inspect
+    admin_client_account_client_product_clone_url(@client, resource)
   end
           
   def set_client
@@ -45,7 +62,11 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
   end
   
   def find_resource
-    res = Spree::ClientProduct.with_deleted.friendly.find(params[:id])
+    if (!params[:id].nil?)
+      res = Spree::ClientProduct.with_deleted.friendly.find(params[:id])
+    elsif !params[:client_product_id].nil?
+      res = Spree::ClientProduct.with_deleted.friendly.find(params[:client_product_id])
+    end
     #Rails.logger.info "resource: "+res.inspect
     @product = res
   end

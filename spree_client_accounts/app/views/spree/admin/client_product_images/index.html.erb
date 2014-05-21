@@ -3,7 +3,7 @@
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => 'Images'} %>
 
 <% content_for :page_actions do %>
-  <li><%= link_to_with_icon('plus', Spree.t(:new_image), new_admin_client_product_image_url(@product), :id => 'new_image_link', :class => 'button') %></li>
+  <li><%= link_to_with_icon('plus', Spree.t(:new_image), new_admin_client_account_client_product_client_product_image_url(@client, @product), :id => 'new_image_link', :class => 'button') %></li>
 <% end %>
 
 <div id="images" data-hook></div>
@@ -13,7 +13,7 @@
     <%= Spree.t(:no_images_found) %>.
   </div>
 <% else %>
-  <table class="index sortable" data-hook="images_table" data-sortable-link="<%= update_positions_admin_client_product_images_url(@product) %>">
+  <table class="index sortable" data-hook="images_table" data-sortable-link="<%= update_positions_admin_product_images_url(@product) %>">
     <colgroup>
       <col style="width: 5%">
       <col style="width: 10%">
@@ -48,8 +48,8 @@
           <% end %>
           <td><%= image.alt %></td>
           <td class="actions">
-            <%= link_to_with_icon 'edit', Spree.t(:edit), edit_admin_client_product_image_url(@product, image), :no_text => true, :data => {:action => 'edit'} %>
-            <%= link_to_delete image, { :url => admin_client_product_image_url(@product, image), :no_text => true } %>
+            <%= link_to_edit image, {:url => edit_object_url(image) , :no_text => true, :data => {:action => 'edit'}} %>
+            <%= link_to_delete image, { :url => admin_client_account_client_product_client_product_image_url(@client, @product, image), :no_text => true } %>
           </td>
         </tr>
       <% end %>
