@@ -11,7 +11,7 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
   
   def collection
     res = super
-    res = res.where(:client_id => session[:client_id])
+    res = res.where(:client_id => session[:client_account_id])
   end
   
   protected
@@ -21,10 +21,10 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
   end
           
   def set_client
-    if params[:client_id].to_i > 0
-      session[:client_id] = params[:client_id].to_i
+    if params[:client_account_id].to_i > 0
+      session[:client_account_id] = params[:client_account_id].to_i
     end
-    @client = Spree::ClientAccount.find(session[:client_id])
+    @client = Spree::ClientAccount.find(session[:client_account_id])
   end
   
   def create_before
@@ -32,7 +32,7 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
       @prototype = Spree::Prototype.find(params[:client_product][:prototype_id])
     end
     
-    @object.client_id = session[:client_id]
+    @object.client_id = session[:client_account_id]
   end
   
   def new_before

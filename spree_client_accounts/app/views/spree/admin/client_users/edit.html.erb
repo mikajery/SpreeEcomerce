@@ -13,7 +13,7 @@
   </div>
 
   <div data-hook="admin_user_edit_form">
-    <%= form_for [:admin, @client_user], as: :user, url: admin_client_account_client_user_url(@client, @client_user), method: :put do |f| %>
+    <%= form_for [:admin, @client, @client_user], as: :user, method: :put do |f| %>
       <%= render :partial => 'form', :locals => { :f => f } %>
 
       <div data-hook="admin_user_edit_form_button">

@@ -24,8 +24,8 @@ class Spree::Admin::ClientUsersController < Spree::Admin::ResourceController
   end
 
   def create
-    if params[:client_user]
-      roles = params[:client_user].delete("spree_role_ids")
+    if params[:user]
+      roles = params[:user].delete("spree_role_ids")
     end
 
     @client_user = Spree::ClientUser.new(client_user_params)
@@ -45,8 +45,8 @@ class Spree::Admin::ClientUsersController < Spree::Admin::ResourceController
   end
 
   def update
-    if params[:client_user]
-      roles = params[:client_user].delete("spree_role_ids")
+    if params[:user]
+      roles = params[:user].delete("spree_role_ids")
     end
 
     if @client_user.update_attributes(client_user_params)
@@ -88,18 +88,17 @@ class Spree::Admin::ClientUsersController < Spree::Admin::ResourceController
     if @client_user.generate_spree_api_key!
       flash[:success] = Spree.t('api.key_generated')
     end
-    redirect_to edit_admin_client_user_path(@client_user)
+    redirect_to edit_admin_client_account_client_user_path(@client, @client_user)
   end
 
   def clear_api_key
     if @client_user.clear_spree_api_key!
       flash[:success] = Spree.t('api.key_cleared')
     end
-    redirect_to edit_admin_client_user_path(@client_user)
+    redirect_to edit_admin_client_account_client_user_path(@client, @client_user)
   end
 
   def model_class
-    Rails.logger.info "model class:::::: #{Spree.user_class}"
     #Spree.user_class
     Spree::ClientUser
   end
@@ -128,6 +127,7 @@ class Spree::Admin::ClientUsersController < Spree::Admin::ResourceController
 
   private
     def client_user_params
+      #Rails.logger.info "params: "+params[:user].inspect
       params.require(:user).permit(Spree::PermittedAttributes.user_attributes |
                                    [:spree_role_ids,
                                     ship_address_attributes: Spree::PermittedAttributes.address_attributes,
@@ -171,4 +171,9 @@ class Spree::Admin::ClientUsersController < Spree::Admin::ResourceController
       end
       @client = Spree::ClientAccount.find(session[:client_account_id])
     end
+    
+    def permit_attributes
+      params.require(:user).permit!
+    end
+    
 end

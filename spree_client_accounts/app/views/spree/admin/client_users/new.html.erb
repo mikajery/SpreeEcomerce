@@ -13,11 +13,11 @@
 </div>
 
 <div data-hook="admin_user_new_form">
-  <%= form_for [:admin, @client_user], url: admin_client_account_client_users_url, method: :post do |f| %>
+  <%= form_for [:admin, @client, @client_user], as: :user, method: :post do |f| %>
     <%= render :partial => 'form', :locals => { :f => f } %>
 
     <div data-hook="admin_user_new_form_buttons">
-      <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+      <%= render :partial => 'spree/admin/shared/new_resource_links', :locals => { :collection_url => spree.admin_client_account_client_users_path }  %>
     </div>
   <% end %>
 </div>
