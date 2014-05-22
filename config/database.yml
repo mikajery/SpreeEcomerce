@@ -11,7 +11,7 @@ development:
   password: root
   pool: 5
   timeout: 5000
-  encoding: utf8
+  
 
 james:
   adapter: mysql2
