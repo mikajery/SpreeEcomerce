@@ -88,10 +88,6 @@
 							:no_text => true, :class => 'edit' if can?(:edit, product) && !product.deleted? %>
               &nbsp;
 							
-							<%
-								clone_object_url = admin_client_account_client_product_clone_url(@client, product)
-								
-							%>
               <%= link_to_clone product, 
 							:no_text => true, :class => 'clone' if can?(:clone, product) %>
               &nbsp;

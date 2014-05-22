@@ -6,18 +6,32 @@ Spree::Core::Engine.routes.draw do
       resources :client_users, path: "users"
       
       resources :client_products, path: "products" do
+        
+        member do
+          get :clone
+          get :stock
+        end
+              
         resources :client_product_images, path: "images" do
           collection do
             post :update_positions
           end
         end
         
-        get "clone" => "client_products#clone", 
-          as: :clone
-          
-        get "stock" => "client_products#stock", 
-          as: :stock
-          
+        resources :client_variants, path: "variants" do
+          collection do
+            post :update_positions
+          end
+        end
+        
+        resources :variants_including_master, :only => [:update]
+        
+        # resources :product_properties do
+#           collection do
+#             post :update_positions
+#           end
+#         end
+        
       end
       
     end

@@ -33,8 +33,8 @@ class Spree::Admin::ClientProductsController < Spree::Admin::ProductsController
   
   def clone_object_url(resource)
     #request.url(:action => :clone)
-    Rails.logger.info resource.inspect
-    admin_client_account_client_product_clone_url(@client, resource)
+    #Rails.logger.info resource.inspect
+    clone_admin_client_account_client_product_url(@client, resource)
   end
           
   def set_client
