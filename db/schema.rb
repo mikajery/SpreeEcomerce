@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140522144521) do
 
   create_table "deliveries", force: true do |t|
@@ -19,6 +20,9 @@ ActiveRecord::Schema.define(version: 20140522144521) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+=======
+ActiveRecord::Schema.define(version: 20140520070108) do
+>>>>>>> d5667afb46a8e7d3f64bbb16fbabcf3181dc26c5
 
   create_table "spree_addresses", force: true do |t|
     t.string   "firstname"
@@ -389,9 +393,11 @@ ActiveRecord::Schema.define(version: 20140522144521) do
     t.integer  "shipping_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "client_id"
   end
 
   add_index "spree_products", ["available_on"], name: "index_spree_products_on_available_on", using: :btree
+  add_index "spree_products", ["client_id"], name: "index_spree_products_on_client_id", using: :btree
   add_index "spree_products", ["deleted_at"], name: "index_spree_products_on_deleted_at", using: :btree
   add_index "spree_products", ["name"], name: "index_spree_products_on_name", using: :btree
   add_index "spree_products", ["slug"], name: "index_spree_products_on_slug", using: :btree

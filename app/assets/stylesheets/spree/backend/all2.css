@@ -10,12 +10,9 @@
  *
  *= require_self
  *= require_tree .
- */
-
+*/
 
 body {
-	padding: 100px;
+	padding-top: 50px;
 }
-nav.menu ul li.active a {
-	background-color: #f1f1f1;
-}
+

@@ -2,3 +2,43 @@
 Placeholder manifest file.
 the installer will append this file to the app vendored assets here: 'vendor/assets/stylesheets/spree/backend/all.css'
 */
+
+#sidebar {
+	float: right;
+}
+
+#admin-menu {
+	background: #d82215; /* Old browsers */
+	background: -moz-linear-gradient(top,  #d82215 0%, #960303 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d82215), color-stop(100%,#960303)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #d82215 0%,#960303 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #d82215 0%,#960303 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #d82215 0%,#960303 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #d82215 0%,#960303 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d82215', endColorstr='#960303',GradientType=0 ); /* IE6-9 */
+	
+}
+
+input[type="submit"], input[type="button"], button, .button,
+.select2-container .select2-choice {
+	background-color: #d82215;
+}
+
+#content-header {
+	background: #eaefb5; /* Old browsers */
+	background: -moz-linear-gradient(top, #eaefb5 0%, #e1e9a0 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaefb5), color-stop(100%,#e1e9a0)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #eaefb5 0%,#e1e9a0 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #eaefb5 0%,#e1e9a0 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #eaefb5 0%,#e1e9a0 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #eaefb5 0%,#e1e9a0 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaefb5', endColorstr='#e1e9a0',GradientType=0 ); /* IE6-9 */
+}
+
+fieldset {
+	padding: 0 0 15px 0;
+}
+
+fieldset .filter-actions {
+	margin-top: 5px;
+}

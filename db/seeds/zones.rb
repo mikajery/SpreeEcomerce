@@ -10,19 +10,29 @@ east_malaysia    = Spree::Zone.create!(name: "East Malaysia", description: "East
 west_malaysia    = Spree::Zone.create!(name: "West Malaysia", description: "West")
 
 
-["Malaysia"].each do |name|
-  east_malaysia.zone_members.create!(zoneable: Spree::Country.find_by!(name: name))
-end
+# ["Malaysia"].each do |name|
+#   east_malaysia.zone_members.create!(zoneable: Spree::Country.find_by!(name: name))
+# end
+# 
+# ["Malaysia"].each do |name|
+#   west_malaysia.zone_members.create!(zoneable: Spree::Country.find_by!(name: name))
+# end
 
-["Malaysia"].each do |name|
-  west_malaysia.zone_members.create!(zoneable: Spree::Country.find_by!(name: name))
-end
 
-
-zone = Spree::Zone.where(:name => "East Malaysia").first
-  if !zone.nil?
-  zone.members.each do |member|
-    member.delete
-  end
-end
-
+# zone = Spree::Zone.where(:name => "East Malaysia").first
+# #zone.members.create(:)
+# 
+# zone = Spree::Zone.where(:name => "East Malaysia").first
+#   if !zone.nil?
+#   zone.members.each do |member|
+#     member.delete
+#   end
+# end
+# 
+# 
+# zone = Spree::Zone.where(:name => "West Malaysia").first
+#   if !zone.nil?
+#   zone.members.each do |member|
+#     member.delete
+#   end
+# end

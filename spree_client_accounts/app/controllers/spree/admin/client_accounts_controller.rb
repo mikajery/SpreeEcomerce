@@ -1,17 +1,14 @@
 class Spree::Admin::ClientAccountsController < Spree::Admin::ResourceController
-  #before_action :set_client_account, only: [:show, :edit, :update, :destroy]
-
-  # GET /client_accounts
-  def index2
-    @client_accounts = collection()#Spree::ClientAccount.all
-  end
+  before_action :set_client, only: [:show, :edit, :update, :destroy]
   
   def index
+    #authorize! :list, Spree::ClientAccount, session[:access_token]
     session[:return_to] = request.url
     respond_with(@collection)
   end
   
   def update
+    authorize! :update, @object, session[:access_token]
     #Rails.logger.info "permitted: "+permitted_resource_params.inspect
     #Rails.logger.info "object: "+@object.inspect
     invoke_callbacks(:update, :before)
@@ -34,6 +31,7 @@ class Spree::Admin::ClientAccountsController < Spree::Admin::ResourceController
   
   # GET /client_accounts/1
   def show
+    authorize! :read, @object, session[:access_token]
     session[:return_to] ||= request.referer
     redirect_to( :action => :edit )
   end
@@ -61,7 +59,9 @@ class Spree::Admin::ClientAccountsController < Spree::Admin::ResourceController
     Spree::ClientAccount.find(params[:id])
   end
 
-
+  def set_client
+    @client = find_resource()
+  end
   
   def permit_attributes
     params.require(:client_account).permit(:name, :credit_duration, :credit_limit,

@@ -1,0 +1,39 @@
+<% content_for :sidebar_title do %>
+  <%= @client.name %>
+<% end %>
+
+<% content_for :sidebar do %>
+  <nav class="menu">
+    <ul data-hook="admin_clients_tabs">
+      <%= content_tag :li, :class => ('active' if current == 'Clients') do %>
+        <%= link_to_with_icon 'edit', Spree.t(:clients_account), edit_admin_client_account_path(@client) %>
+      <% end if can?(:admin, Spree::ClientAccount) %>
+			
+      <%= content_tag :li, :class => ('active' if current == 'Users') do %>
+        <%= link_to_with_icon 'users', Spree.t(:users), admin_client_account_client_users_url(:client_account_id=>@client.id) %>
+      <% end if can?(:admin, Spree::ClientAccount) %>
+
+      <%= content_tag :li, :class => ('active' if current == 'Product Management') do %>
+        <%= link_to_with_icon 'tasks', Spree.t(:product_management), admin_client_account_client_products_url(:client_account_id=>@client.id) %>
+      <% end if can?(:admin, Spree::Product) %>
+      </li>
+    </ul>
+  </nav>
+	
+	
+  <fieldset data-hook="admin_user_lifetime_stats">
+    <legend><%= Spree.t(:lifetime_stats) %></legend>
+    <dl id="user-lifetime-stats">
+      <dt><%= Spree.t(:total_sales) %>:</dt>
+        <dd><%= @client.display_lifetime_value.to_html %></dd>
+      <dt><%= Spree.t(:num_orders) %>:</dt>
+        <dd><%= @client.order_count.to_i %></dd>
+      <dt><%= Spree.t(:average_order_value) %>:</dt>
+        <dd><%= @client.display_average_order_value.to_html %></dd>
+      <dt><%= Spree.t(:member_since) %>:</dt>
+        <dd><%= l @client.created_at.to_date %></dd>
+    </dl>
+  </fieldset>
+	
+
+<% end %>

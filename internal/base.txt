@@ -2,3 +2,5 @@
 create database `mercstud_aji` DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
 grant all on `mercstud_aji`.* to 'mercstud_ajiu'@'localhost' identified by '3gui12$%^%YTHTRG';
+
+

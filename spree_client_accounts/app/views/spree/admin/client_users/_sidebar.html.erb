@@ -1,0 +1,15 @@
+<% content_for :sidebar_title do %>
+  <%= Spree.t(:"admin.user.user_information") %>
+<% end %>
+
+<% content_for :sidebar do %>
+  <nav class="menu">
+    <ul data-hook="admin_user_tab_options">
+      <li<%== ' class="active"' if current == :account %>>
+        <%= link_to_with_icon 'user', Spree.t(:"admin.user.account"), edit_admin_client_account_client_user_path(@client, @client_user) %>
+      </li>
+    </ul>
+
+    
+  </nav>
+<% end %>
