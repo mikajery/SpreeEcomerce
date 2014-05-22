@@ -1,8 +1,7 @@
 
-class Spree::Admin::ClientVariantsController < Spree::Admin::VariantsController
-  
+class Spree::Admin::ClientProductPropertiesController < Spree::Admin::ProductPropertiesController
+
   protected
-  
   def object_url(variant)
     admin_client_account_client_product_client_variant_url(@client, @product, variant)
   end
@@ -33,8 +32,10 @@ class Spree::Admin::ClientVariantsController < Spree::Admin::VariantsController
       load_client()
     end
     
+    #Rails.logger.info "client: "+@client.inspect
+    #Rails.logger.info "product: "+@product.inspect
     res = admin_client_account_client_product_client_variants_url(@client, @product, params)
-    #Rails.logger.info "collection-url: "+res
+    Rails.logger.info "collection-url: "+res
     res
   end
   
@@ -45,7 +46,7 @@ class Spree::Admin::ClientVariantsController < Spree::Admin::VariantsController
     
   end
   
-  
+  #load client now only from load resources
   def load_resource
     load_client()
     res = super
