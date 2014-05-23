@@ -12,7 +12,14 @@ MyStore::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  get "cart/add_delivery" => "spree#orders#add_delivery"
+  #get "cart/add_delivery" => "spree#orders#add_delivery"
+  Spree::Core::Engine.routes.draw do
+     resources :orders, except: [:new, :create, :destroy] do
+        get :add_delivery, on: :collection
+     end
+  end
+  # add_delivery_orders_path
+  #get '/add_delivery', :to => 'spree#orders#add_delivery' , :as => :add_delivery
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -62,8 +69,4 @@ MyStore::Application.routes.draw do
   #     resources :products
   #   end
 end
-Spree::Core::Engine.routes.draw do
-   resources :orders, except: [:new, :create, :destroy] do
-      post :add_delivery, on: :collection
-   end
-end
+
