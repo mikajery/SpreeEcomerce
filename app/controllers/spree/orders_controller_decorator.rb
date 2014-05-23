@@ -9,8 +9,8 @@ Spree::OrdersController.class_eval do
     end
     def add_delivery
     	@delivery = Delivery.new
-    	@delivery.description = params[:del-dsc]
+    	@delivery.description = params[:del_dsc]
     	@delivery.save
-    	
+    	redirect_to :action => :edit
     end
 end

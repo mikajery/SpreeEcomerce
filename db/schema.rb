@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140522144521) do
 
   create_table "deliveries", force: true do |t|
@@ -20,9 +19,6 @@ ActiveRecord::Schema.define(version: 20140522144521) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-=======
-ActiveRecord::Schema.define(version: 20140520070108) do
->>>>>>> d5667afb46a8e7d3f64bbb16fbabcf3181dc26c5
 
   create_table "spree_addresses", force: true do |t|
     t.string   "firstname"

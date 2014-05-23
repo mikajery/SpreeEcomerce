@@ -33,9 +33,9 @@
   <div class="delivery-box">
     <input id = "add-delivery" type = "button" value = "Add Delivery" />
     <div id = "deli-form">
-      <%= form_tag add_delivery_orders_path , method: "post", remote: true do %>
+      <%= form_tag add_delivery_orders_path , method: "post" do %>
           <h5>Destination</h5>
-          <%= text_field_tag "del-dsc","" %>
+          <%= text_field_tag "del_dsc","" %>
           <%= submit_tag("Save") %>
         
       <% end %>
