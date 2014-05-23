@@ -12,3 +12,16 @@
  *= require spree/frontend/spree_static_content
  *= require spree/frontend/spree_client_accounts
 */
+
+.container #update-cart div[data-hook="inside_cart_form"] .sixteen.columns{
+	width: auto;
+	float: right;
+}
+.delivery-box{
+	position: relative;
+	margin-top: 15px;
+}
+#empty-cart{
+	float: left;
+    margin-top: 0px;
+}

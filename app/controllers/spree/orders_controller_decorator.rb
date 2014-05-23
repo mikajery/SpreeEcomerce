@@ -8,6 +8,9 @@ Spree::OrdersController.class_eval do
       end
     end
     def add_delivery
-    	logger.info"==================="
+    	@delivery = Delivery.new
+    	@delivery.description = params[:del-dsc]
+    	@delivery.save
+    	
     end
 end

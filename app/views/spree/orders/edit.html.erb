@@ -18,8 +18,9 @@
         <%= render :partial => 'form', :locals => { :order_form => order_form } %>
       </div>
 
-      <div class="links columns sixteen alpha omega" data-hook="cart_buttons">
-        <%= order_form.text_field :coupon_code, :size => 10, :placeholder => Spree.t(:coupon_code) %>
+      <div class="links columns sixteen alpha omega" data-hook="cart_buttons"  style="position: relative; margin-top: 5px;">
+        <%= order_form.text_field :coupon_code, 1
+        :size => 10, :placeholder => Spree.t(:coupon_code) %>
         <%= button_tag :class => 'primary', :id => 'update-button' do %>
           <%= Spree.t(:update) %>
       <% end %>
@@ -29,7 +30,7 @@
       </div>
     </div>
   <% end %>
-  <div>
+  <div class="delivery-box">
     <input id = "add-delivery" type = "button" value = "Add Delivery" />
     <div id = "deli-form">
       <%= form_tag add_delivery_orders_path , method: "post", remote: true do %>

@@ -15,7 +15,8 @@ MyStore::Application.routes.draw do
   #get "cart/add_delivery" => "spree#orders#add_delivery"
   Spree::Core::Engine.routes.draw do
      resources :orders, except: [:new, :create, :destroy] do
-        get :add_delivery, on: :collection
+        #get :add_delivery, on: :collection
+        post :add_delivery, on: :collection
      end
   end
   # add_delivery_orders_path
